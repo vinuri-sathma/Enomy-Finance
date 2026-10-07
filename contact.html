@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Enomy Finances</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-wrapper {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .contact-card {
+            width: 100%;
+            max-width: 950px;
+            background: rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .contact-card h1 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 38px;
+            color: #000000;
+        }
+
+        .contact-card .contact-subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 18px;
+            color: #000000;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 30px;
+        }
+
+        .contact-info-box,
+        .contact-form-box {
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-info-box h2,
+        .contact-form-box h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #000000;
+        }
+
+        .contact-info-item {
+            margin-bottom: 18px;
+        }
+
+        .contact-info-item h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+            color: #000000;
+        }
+
+        .contact-info-item p {
+            font-size: 16px;
+            color: #000000;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .contact-form .contact-field,
+        .contact-form textarea.contact-field {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ffd369;
+            border-radius: 12px;
+            outline: none;
+            font-size: 15px;
+            background-color: #ffffff;
+            color: #000000;
+            box-shadow: 0 0 8px rgba(255, 211, 105, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .contact-form .contact-field:focus,
+        .contact-form textarea.contact-field:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 12px rgba(255, 179, 0, 0.8);
+            background-color: #fffdf5;
+        }
+
+        .contact-form .contact-field::placeholder,
+        .contact-form textarea.contact-field::placeholder {
+            color: #666666;
+        }
+
+        .contact-form textarea.contact-field {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .contact-popup-content {
+            background: #fff;
+            color: #222;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-popup-content h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .contact-popup-content button {
+            padding: 10px 20px;
+            background: #ffd369;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .contact-popup-content button:hover {
+            background: #ffbf00;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-card h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- NAVBAR -->
+        <div class="navbar">
+            <div class="logo">Enomy-Finances</div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="currency.html">Currency Converter</a>
+                <a href="investment.html">Investment Calculator</a>
+                <a href="reports.html">Reports</a>
+                <a href="login.html">Logout</a>
+            </div>
+        </div>
+
+        <!-- CONTACT SECTION -->
+        <div class="contact-wrapper">
+            <div class="contact-card">
+                <h1>Contact Us</h1>
+                <p class="contact-subtitle">We are here to help you with your financial service inquiries.</p>
+
+                <div class="contact-grid">
+
+                    <!-- CONTACT DETAILS -->
+                    <div class="contact-info-box">
+                        <h2>Contact Details</h2>
+
+                        <div class="contact-info-item">
+                            <h3>Address</h3>
+                            <p>Enomy-Finances Head Office,<br>Colombo, Sri Lanka</p>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <h3>Phone</h3>
+                            <p>+94 11 234 5678</p>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <h3>Email</h3>
+                            <p>supportenomyfinances@gmail.com</p>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <h3>Working Hours</h3>
+                            <p>Monday - Friday<br>8:30 AM - 5:30 PM</p>
+                        </div>
+                    </div>
+
+                    <!-- CONTACT FORM -->
+                    <div class="contact-form-box">
+                        <h2>Send a Message</h2>
+
+                        <form id="contactForm" class="contact-form" autocomplete="off">
+                            <div class="form-group">
+                                <label for="contact-name">Full Name</label>
+                                <input type="text" id="contact-name" class="contact-field" placeholder="Enter your full name" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-email">Email Address</label>
+                                <input type="email" id="contact-email" class="contact-field" placeholder="Enter your email address" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-subject">Subject</label>
+                                <input type="text" id="contact-subject" class="contact-field" placeholder="Enter message subject" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-message">Message</label>
+                                <textarea id="contact-message" class="contact-field" placeholder="Write your message here"></textarea>
+                            </div>
+
+                            <button type="button" class="btn" onclick="sendMessage()">Send Message</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- POPUP -->
+    <div class="contact-popup" id="contactPopup">
+        <div class="contact-popup-content">
+            <h2>✔ Message Sent Successfully!</h2>
+            <button onclick="closeContactPopup()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            document.getElementById("contact-name").value = "";
+            document.getElementById("contact-email").value = "";
+            document.getElementById("contact-subject").value = "";
+            document.getElementById("contact-message").value = "";
+        };
+
+        function sendMessage() {
+            let name = document.getElementById("contact-name").value.trim();
+            let email = document.getElementById("contact-email").value.trim();
+            let subject = document.getElementById("contact-subject").value.trim();
+            let message = document.getElementById("contact-message").value.trim();
+
+            if (name === "" || email === "" || subject === "" || message === "") {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            document.getElementById("contactPopup").style.display = "flex";
+            document.getElementById("contactForm").reset();
+        }
+
+        function closeContactPopup() {
+            window.location.href = "dashboard.html";
+        }
+    </script>
+
+</body>
+</html>

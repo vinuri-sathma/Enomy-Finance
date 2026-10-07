@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Enomy Finances</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .popup-content {
+            background: #fff;
+            color: #222;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .popup-content h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .popup-content button {
+            padding: 10px 20px;
+            background: #ffd369;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .popup-content button:hover {
+            background: #ffbf00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-center">
+        <div class="card">
+            <h1>Register</h1>
+            <p>Create your Enomy-Finances account</p>
+
+            <form id="registerForm" class="register-form" autocomplete="off">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" class="register-field" placeholder="Enter full name" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="register-field" placeholder="Enter email" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" class="register-field" placeholder="Enter phone number" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="register-field" placeholder="Create username" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="register-field" placeholder="Create password" autocomplete="new-password">
+                </div>
+
+                <button type="button" class="btn" onclick="registerUser()">Register</button>
+            </form>
+
+            <div class="link-text">
+                Already have an account? <a href="login.html">Login Here</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h2>✔ Registration Successful!</h2>
+            <button onclick="goToLogin()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            document.getElementById("fullname").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+        };
+
+        function registerUser() {
+            let fullname = document.getElementById("fullname").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+            let username = document.getElementById("username").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            if (fullname === "" || email === "" || phone === "" || username === "" || password === "") {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            document.getElementById("popup").style.display = "flex";
+            document.getElementById("registerForm").reset();
+        }
+
+        function goToLogin() {
+            window.location.href = "login.html";
+        }
+    </script>
+
+</body>
+</html>

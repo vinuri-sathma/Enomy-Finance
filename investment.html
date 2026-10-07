@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Calculator - Enomy Finances</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 6px;
+            display: block;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- NAVBAR -->
+        <div class="navbar">
+            <div class="logo">Enomy-Finances</div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="currency.html">Currency Converter</a>
+                <a href="reports.html">Reports</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="login.html">Logout</a>
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="form-page">
+            <div class="large-card">
+                <h1>Investment Calculator</h1>
+
+                <form class="investment-form">
+
+                    <!-- Principal -->
+                    <div class="form-group">
+                        <label for="principal">Initial Investment Amount</label>
+                        <input type="text" id="principal" class="investment-field" placeholder="Enter initial amount" oninput="validatePrincipal()">
+                        <span id="principalError" class="error-message"></span>
+                    </div>
+
+                    <!-- Rate -->
+                    <div class="form-group">
+                        <label for="rate">Annual Interest Rate (%)</label>
+                        <input type="text" id="rate" class="investment-field" placeholder="Enter annual interest rate" oninput="validateRate()">
+                        <span id="rateError" class="error-message"></span>
+                    </div>
+
+                    <!-- Years -->
+                    <div class="form-group">
+                        <label for="years">Investment Period (Years)</label>
+                        <input type="text" id="years" class="investment-field" placeholder="Enter number of years" oninput="validateYears()">
+                        <span id="yearsError" class="error-message"></span>
+                    </div>
+
+                    <!-- Result -->
+                    <div class="form-group">
+                        <label for="returns">Estimated Return</label>
+                        <input type="text" id="returns" class="investment-field investment-result-field" readonly>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="button-row">
+                        <button type="button" class="btn" onclick="calculateInvestment()">Calculate</button>
+                        <a href="dashboard.html" class="back-btn">Back to Dashboard</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function validateNumber(value, errorElement) {
+
+            if (value.trim() === "") {
+                errorElement.textContent = "";
+                return false;
+            }
+
+            if (value.includes(" ")) {
+                errorElement.textContent = "Field cannot contain spaces.";
+                return false;
+            }
+
+            if (!/^\d*\.?\d*$/.test(value)) {
+                errorElement.textContent = "Letters are not allowed. Numbers only.";
+                return false;
+            }
+
+            if ((value.match(/\./g) || []).length > 1) {
+                errorElement.textContent = "Invalid number format.";
+                return false;
+            }
+
+            errorElement.textContent = "";
+            return true;
+        }
+
+        function validatePrincipal() {
+            let value = document.getElementById("principal").value;
+            let error = document.getElementById("principalError");
+            return validateNumber(value, error);
+        }
+
+        function validateRate() {
+            let value = document.getElementById("rate").value;
+            let error = document.getElementById("rateError");
+            return validateNumber(value, error);
+        }
+
+        function validateYears() {
+            let value = document.getElementById("years").value;
+            let error = document.getElementById("yearsError");
+            return validateNumber(value, error);
+        }
+
+        function calculateInvestment() {
+
+            let principal = document.getElementById("principal").value.trim();
+            let rate = document.getElementById("rate").value.trim();
+            let years = document.getElementById("years").value.trim();
+
+            let pValid = validatePrincipal();
+            let rValid = validateRate();
+            let yValid = validateYears();
+
+            if (principal === "" || rate === "" || years === "") {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            if (!pValid || !rValid || !yValid) {
+                return;
+            }
+
+            principal = parseFloat(principal);
+            rate = parseFloat(rate);
+            years = parseFloat(years);
+
+            if (principal <= 0 || rate <= 0 || years <= 0) {
+                alert("Please enter valid positive numbers!");
+                return;
+            }
+
+            let totalAmount = principal + (principal * rate * years / 100);
+
+            document.getElementById("returns").value = totalAmount.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Enomy Finances</title>
+    <link rel="stylesheet" href="adminstyle.css">
+
+    <style>
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 6px;
+            font-weight: bold;
+        }
+
+        /* SUCCESS POPUP */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .popup-content button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #ffd369;
+            color: #000;
+        }
+
+        .popup-content button:hover {
+            background: #ffbf00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-page-center">
+        <div class="admin-card">
+            <h1>Admin Login</h1>
+            <p>Sign in to access the Enomy-Finances admin panel</p>
+
+            <form id="adminLoginForm" autocomplete="off">
+
+                <!-- Email -->
+                <div class="admin-form-group">
+                    <label for="admin-email">Admin Email</label>
+                    <input type="text" id="admin-email" placeholder="Enter admin email" autocomplete="off" oninput="validateAdminEmail()">
+                    <span id="adminEmailError" class="error-message"></span>
+                </div>
+
+                <!-- Password -->
+                <div class="admin-form-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" placeholder="Enter password" autocomplete="new-password">
+                </div>
+
+                <button type="button" class="admin-btn" onclick="adminLogin()">Login</button>
+
+            </form>
+
+            <div class="admin-link-text">
+                Back to Client Login? <a href="../login.html">Open Client Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS POPUP -->
+    <div class="popup" id="adminLoginPopup">
+        <div class="popup-content">
+            <h2>✔ Login Successful!</h2>
+            <button onclick="goToAdminDashboard()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            document.getElementById("admin-email").value = "";
+            document.getElementById("admin-password").value = "";
+            document.getElementById("adminEmailError").textContent = "";
+        };
+
+        // Email validation function
+        function validateAdminEmail() {
+            let email = document.getElementById("admin-email").value;
+            let error = document.getElementById("adminEmailError");
+
+            if (email.trim() === "") {
+                error.textContent = "";
+                return false;
+            }
+
+            if (email.includes(" ")) {
+                error.textContent = "Email cannot contain spaces.";
+                return false;
+            }
+
+            if (!email.includes("@")) {
+                error.textContent = "Email must include '@' symbol.";
+                return false;
+            }
+
+            error.textContent = "";
+            return true;
+        }
+
+        function adminLogin() {
+            let email = document.getElementById("admin-email").value.trim();
+            let password = document.getElementById("admin-password").value.trim();
+            let emailValid = validateAdminEmail();
+
+            if (email === "" || password === "") {
+                alert("Please enter admin email and password!");
+                return;
+            }
+
+            if (!emailValid) {
+                return;
+            }
+
+            // SHOW SUCCESS POPUP
+            document.getElementById("adminLoginPopup").style.display = "flex";
+        }
+
+        function goToAdminDashboard() {
+            window.location.href = "admindashboard.html";
+        }
+    </script>
+
+</body>
+</html>

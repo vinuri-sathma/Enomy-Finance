@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Enomy Finances</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 6px;
+            display: block;
+        }
+
+        /* SUCCESS POPUP */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .popup-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .popup-content button {
+            padding: 10px 20px;
+            background: #ffd369;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .popup-content button:hover {
+            background: #ffbf00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-center">
+        <div class="card">
+            <h1 id="loginTitle">Login</h1>
+            <p>Sign in to continue to your dashboard</p>
+
+            <form id="loginForm" class="login-form" autocomplete="off">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" class="login-field" placeholder="Enter email" autocomplete="off" oninput="validateEmail()">
+                    <span id="emailError" class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" class="login-field" placeholder="Enter password" autocomplete="new-password">
+                </div>
+
+                <button type="button" class="btn" onclick="loginUser()">Login</button>
+            </form>
+
+            <div class="link-text">
+                Don't have an account? <a href="register.html">Register Here</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS POPUP -->
+    <div class="popup" id="loginPopup">
+        <div class="popup-content">
+            <h2>✔ Login Successful!</h2>
+            <button onclick="goToDashboard()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        let clickCount = 0;
+
+        window.onload = function () {
+            document.getElementById("login-email").value = "";
+            document.getElementById("login-password").value = "";
+            document.getElementById("emailError").textContent = "";
+
+            document.getElementById("loginTitle").addEventListener("click", function () {
+                clickCount++;
+
+                if (clickCount === 3) {
+                    window.location.href = "admin/adminlogin.html";
+                }
+            });
+        };
+
+        function validateEmail() {
+            let email = document.getElementById("login-email").value;
+            let emailError = document.getElementById("emailError");
+
+            if (email.includes(" ")) {
+                emailError.textContent = "Email address cannot contain spaces.";
+                return false;
+            }
+
+            if (!email.includes("@")) {
+                emailError.textContent = "Email address must include @ symbol.";
+                return false;
+            }
+
+            emailError.textContent = "";
+            return true;
+        }
+
+        function loginUser() {
+            let email = document.getElementById("login-email").value.trim();
+            let password = document.getElementById("login-password").value.trim();
+            let emailError = document.getElementById("emailError");
+
+            if (email === "" || password === "") {
+                alert("Please enter email and password!");
+                return;
+            }
+
+            if (email.includes(" ")) {
+                emailError.textContent = "Email address cannot contain spaces.";
+                return;
+            }
+
+            if (!email.includes("@")) {
+                emailError.textContent = "Email address must include @ symbol.";
+                return;
+            }
+
+            emailError.textContent = "";
+
+            // SHOW SUCCESS POPUP
+            document.getElementById("loginPopup").style.display = "flex";
+        }
+
+        function goToDashboard() {
+            window.location.href = "dashboard.html";
+        }
+    </script>
+
+</body>
+</html>

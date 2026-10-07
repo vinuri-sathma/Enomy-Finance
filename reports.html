@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Enomy Finances</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- NAVBAR -->
+        <div class="navbar">
+            <div class="logo">Enomy-Finances</div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="currency.html">Currency Converter</a>
+                <a href="investment.html">Investment Calculator</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html">Logout</a>
+            </div>
+        </div>
+
+        <!-- REPORT HEADER -->
+        <div class="reports-header">
+            <h1>Client Summary Report</h1>
+            <p>View a summary of your account activities, financial service usage, and recent interactions.</p>
+        </div>
+
+        <!-- SUMMARY CARDS -->
+        <div class="reports-summary-grid">
+            <div class="report-summary-card">
+                <h2>03</h2>
+                <p>Investment Calculations</p>
+            </div>
+
+            <div class="report-summary-card">
+                <h2>05</h2>
+                <p>Currency Conversions</p>
+            </div>
+
+            <div class="report-summary-card">
+                <h2>02</h2>
+                <p>Service Requests</p>
+            </div>
+
+            <div class="report-summary-card">
+                <h2>01</h2>
+                <p>Contact Messages Sent</p>
+            </div>
+        </div>
+
+        <!-- REPORT CONTENT -->
+        <div class="reports-wrapper">
+
+            <!-- PROFILE SUMMARY -->
+            <div class="report-box">
+                <h2>Customer Profile Summary</h2>
+                <div class="report-details">
+                    <p><strong>Customer Name:</strong> Sathma Dulsini</p>
+                    <p><strong>Customer ID:</strong> ENF1025</p>
+                    <p><strong>Registered Service Type:</strong> Savings and Investment Support</p>
+                    <p><strong>Account Status:</strong> Active</p>
+                    <p><strong>Last Login Date:</strong> <span id="lastLoginDate"></span></p>
+                </div>
+            </div>
+
+            <!-- INVESTMENT SUMMARY -->
+            <div class="report-box">
+                <h2>Investment Summary</h2>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Investment Amount</th>
+                            <th>Interest Rate</th>
+                            <th>Period</th>
+                            <th>Estimated Return</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>LKR 100,000</td>
+                            <td>10%</td>
+                            <td>2 Years</td>
+                            <td>LKR 120,000</td>
+                        </tr>
+                        <tr>
+                            <td>LKR 250,000</td>
+                            <td>8%</td>
+                            <td>3 Years</td>
+                            <td>LKR 310,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- CURRENCY SUMMARY -->
+            <div class="report-box">
+                <h2>Currency Conversion Summary</h2>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Amount</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Converted Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>100</td>
+                            <td>USD</td>
+                            <td>LKR</td>
+                            <td>30,000.00</td>
+                        </tr>
+                        <tr>
+                            <td>200</td>
+                            <td>USD</td>
+                            <td>EUR</td>
+                            <td>180.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- CONTACT MESSAGE SUMMARY -->
+            <div class="report-box">
+                <h2>Contact Message Summary</h2>
+                <div class="report-details">
+                    <p><strong>Last Contact Subject:</strong> Investment Service Information</p>
+                    <p><strong>Message Status:</strong> Sent Successfully</p>
+                    <p><strong>Response Status:</strong> Awaiting Response</p>
+                </div>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="report-button-row">
+                <button class="btn" onclick="window.print()">Print Report</button>
+                <a href="dashboard.html" class="back-btn">Back to Dashboard</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const today = new Date();
+        document.getElementById("lastLoginDate").textContent = today.toLocaleDateString();
+    </script>
+
+</body>
+</html>

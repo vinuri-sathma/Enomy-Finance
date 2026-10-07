@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter - Enomy Finances</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 6px;
+            display: block;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- NAVBAR -->
+        <div class="navbar">
+            <div class="logo">Enomy-Finances</div>
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="investment.html">Investment Calculator</a>
+                <a href="reports.html">Reports</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="login.html">Logout</a>
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="form-page">
+            <div class="large-card">
+                <h1>Currency Converter</h1>
+
+                <form class="currency-form">
+
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="text" id="amount" placeholder="Enter amount" class="currency-field" oninput="validateAmount()">
+                        <span id="amountError" class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="from-currency">From Currency</label>
+                        <select id="from-currency" class="currency-field">
+                            <option value="">Select Currency</option>
+                            <option value="USD">USD</option>
+                            <option value="LKR">LKR</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                            <option value="INR">INR</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="to-currency">To Currency</label>
+                        <select id="to-currency" class="currency-field">
+                            <option value="">Select Currency</option>
+                            <option value="USD">USD</option>
+                            <option value="LKR">LKR</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                            <option value="INR">INR</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="result">Converted Result</label>
+                        <input type="text" id="result" placeholder="Result will appear here" class="currency-field result-field" readonly>
+                    </div>
+
+                    <div class="button-row">
+                        <button type="button" class="btn" onclick="convertCurrency()">Convert</button>
+                        <a href="dashboard.html" class="back-btn">Back to Dashboard</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function validateAmount() {
+            let amount = document.getElementById("amount").value;
+            let amountError = document.getElementById("amountError");
+
+            if (amount.trim() === "") {
+                amountError.textContent = "";
+                return false;
+            }
+
+            if (amount.includes(" ")) {
+                amountError.textContent = "Amount field cannot contain spaces.";
+                return false;
+            }
+
+            if (!/^\d*\.?\d*$/.test(amount)) {
+                amountError.textContent = "Letters are not allowed. Please enter numbers only.";
+                return false;
+            }
+
+            if ((amount.match(/\./g) || []).length > 1) {
+                amountError.textContent = "Please enter a valid numeric amount.";
+                return false;
+            }
+
+            amountError.textContent = "";
+            return true;
+        }
+
+        function convertCurrency() {
+            let amount = document.getElementById("amount").value.trim();
+            let from = document.getElementById("from-currency").value;
+            let to = document.getElementById("to-currency").value;
+            let amountError = document.getElementById("amountError");
+
+            if (amount === "" || from === "" || to === "") {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            if (amount.includes(" ")) {
+                amountError.textContent = "Amount field cannot contain spaces.";
+                return;
+            }
+
+            if (!/^\d*\.?\d*$/.test(amount)) {
+                amountError.textContent = "Letters are not allowed. Please enter numbers only.";
+                return;
+            }
+
+            if ((amount.match(/\./g) || []).length > 1) {
+                amountError.textContent = "Please enter a valid numeric amount.";
+                return;
+            }
+
+            if (isNaN(amount) || parseFloat(amount) <= 0) {
+                amountError.textContent = "Please enter a valid positive amount.";
+                return;
+            }
+
+            amountError.textContent = "";
+            amount = parseFloat(amount);
+
+            let rate = 1;
+
+            if (from === "USD" && to === "LKR") rate = 300;
+            else if (from === "LKR" && to === "USD") rate = 0.0033;
+            else if (from === "USD" && to === "EUR") rate = 0.9;
+            else if (from === "EUR" && to === "USD") rate = 1.1;
+            else if (from === "USD" && to === "GBP") rate = 0.78;
+            else if (from === "GBP" && to === "USD") rate = 1.28;
+            else if (from === "USD" && to === "INR") rate = 83;
+            else if (from === "INR" && to === "USD") rate = 0.012;
+            else if (from === to) rate = 1;
+            else {
+                alert("Conversion not supported!");
+                return;
+            }
+
+            let result = amount * rate;
+            document.getElementById("result").value = result.toFixed(2);
+        }
+    </script>
+
+</body>
+</html>
